@@ -39,5 +39,13 @@ namespace CalculatorTest
             Assert.AreEqual("1", result);
         }
 
+        [TestMethod]
+        public void Add_GoodInputsWithNewlineDelimiter_ReturnsEqual()
+        {
+            string input = "1\n2,3";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("6", result);
+        }
+
     }
 }

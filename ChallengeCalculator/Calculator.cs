@@ -10,7 +10,7 @@ namespace ChallengeCalculator
         {
             // Convert input into string array.
             int result = 0;
-            string[] splitInput = input.Split(',');
+            string[] splitInput = input.Split(',', '\n');
 
             // Compute sum of items, if applicable.
             if (splitInput.Length == 0)
