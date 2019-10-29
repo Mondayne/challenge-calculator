@@ -55,5 +55,13 @@ namespace CalculatorTest
             Calculator.Add(input);
         }
 
+        [TestMethod]
+        public void Add_GoodInputsWithInputOver1000_ReturnsEqual()
+        {
+            string input = "2,1001,6";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("8", result);
+        }
+
     }
 }

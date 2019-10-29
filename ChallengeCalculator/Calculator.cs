@@ -24,7 +24,13 @@ namespace ChallengeCalculator
                 {
                     try
                     {
-                        numberList.Add(Int32.Parse(item));
+                        int number = Int32.Parse(item);
+                        if (number > 1000)
+                        {
+                            // numbers over 1000 are converted to 0 and ignored.
+                        }
+                        else
+                            numberList.Add(number);
                     }
                     catch
                     {
@@ -38,7 +44,7 @@ namespace ChallengeCalculator
             {
                 string badNumberList = CreateListOfNegativeInputs(numberList);
                 throw new FormatException(badNumberList);
-            }
+            }        
 
             return numberList.Sum().ToString();
         }
