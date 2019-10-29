@@ -15,6 +15,7 @@ namespace ChallengeCalculator
             Console.WriteLine(Calculator.Add("2,1001,6"));
             Console.WriteLine(Calculator.Add("//#\n2#5"));
             Console.WriteLine(Calculator.Add("//,\n2,ff,100"));
+            Console.WriteLine(Calculator.Add("//[***]\n11***22***33"));
             Console.ReadKey();
         }
     }

@@ -64,12 +64,20 @@ namespace CalculatorTest
         }
 
         [TestMethod]
-        public void Add_InputWithCustomerDelimiterUsage_ReturnsEqual()
+        public void Add_InputsWithCustomDelimiterUsage_ReturnsEqual()
         {
             string input = "//#\n2#5";
             //string input = "//,\n2,ff,100";
             var result = Calculator.Add(input);
             Assert.AreEqual("7", result);
+        }
+
+        [TestMethod]
+        public void Add_InputsWithCustomBracketedDelimiter_ReturnsEqual()
+        {
+            string input = "//[***]\n11***22***33";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("66", result);
         }
 
     }

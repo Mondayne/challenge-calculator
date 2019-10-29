@@ -68,17 +68,32 @@ namespace ChallengeCalculator
         private static List<string> GetListOfDelimitedInputs(string input)
         {
             // Check for custom delimiter usage.
-            char customDelimiter;
+            string customDelimiter = "";
             if (input.Length > 5)
             {
+                // Check for custom bracketed delimiter format //[{delimiter}]\n{numbers}
+                if (input.Substring(0, 3) == "//[" && input.Substring(3).Contains(']'))
+                {
+                    var delimiterEndMarker = input.IndexOf(']');
+                    if (input.Substring(delimiterEndMarker+1, 1) == "\n")
+                    {
+                        customDelimiter = input.Substring(3, delimiterEndMarker-3);
+                    }
+                }
+                // Check for custom char delimiter.
                 if (input.ElementAt(0) == '/' && input.ElementAt(1) == '/' && input.ElementAt(3) == '\n')
                 {
-                    customDelimiter = input.ElementAt(2);
-                    return input.Split(',', '\n', customDelimiter).ToList();
+                    customDelimiter = input.ElementAt(2).ToString();
                 }
-            }           
-        
-            return input.Split(',', '\n').ToList();
+            }
+
+            // Split string by all delimiter types.
+            if (customDelimiter != "")
+            {
+                input = input.Replace(customDelimiter, ",");
+            }
+            input = input.Replace('\n', ',');           
+            return input.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
         /// <summary>
