@@ -47,5 +47,13 @@ namespace CalculatorTest
             Assert.AreEqual("6", result);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(FormatException), "-3")]
+        public void Add_PositiveInputAndNegativeInput_ReturnsFormatExcepition()
+        {
+            string input = "4,-3";
+            Calculator.Add(input);
+        }
+
     }
 }
