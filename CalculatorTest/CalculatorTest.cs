@@ -63,5 +63,14 @@ namespace CalculatorTest
             Assert.AreEqual("8", result);
         }
 
+        [TestMethod]
+        public void Add_InputWithCustomerDelimiterUsage_ReturnsEqual()
+        {
+            string input = "//#\n2#5";
+            //string input = "//,\n2,ff,100";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("7", result);
+        }
+
     }
 }
