@@ -68,29 +68,50 @@ namespace ChallengeCalculator
         private static List<string> GetListOfDelimitedInputs(string input)
         {
             // Check for custom delimiter usage.
-            string customDelimiter = "";
+            List<string> customDelimiterList = new List<string>();
             if (input.Length > 5)
-            {
+            {                
                 // Check for custom bracketed delimiter format //[{delimiter}]\n{numbers}
                 if (input.Substring(0, 3) == "//[" && input.Substring(3).Contains(']'))
                 {
-                    var delimiterEndMarker = input.IndexOf(']');
-                    if (input.Substring(delimiterEndMarker+1, 1) == "\n")
+                    int delimiterEndMarker = input.IndexOf(']');
+                    // Check for requirement case 7 and 8.
+                    if (input.Substring(delimiterEndMarker+1, 1) == "\n" || input.Substring(delimiterEndMarker + 1, 1) == "[")
                     {
-                        customDelimiter = input.Substring(3, delimiterEndMarker-3);
+                        customDelimiterList.Add(input.Substring(3, delimiterEndMarker-3));
                     }
-                }
-                // Check for custom char delimiter.
+                    // Check for more instances of custom delimiters after the first: //[{delimiter1}][{delimiter2}]...\n{numbers}
+                    int leftMarker = 0;
+                    int rightMarker = 0;
+                    for (int i = delimiterEndMarker+1; i < input.Length; i++)
+                    {                       
+                        if (input[i] == '[' && rightMarker == 0)
+                        {
+                            leftMarker = i;
+                        }
+                        if (input[i] == ']' && leftMarker != 0)
+                        {
+                            rightMarker = i;
+                        }
+                        if (leftMarker != 0 && rightMarker != 0)
+                        {
+                            customDelimiterList.Add(input.Substring(leftMarker + 1, rightMarker - leftMarker - 1));
+                            leftMarker = 0;
+                            rightMarker = 0;
+                        }
+                    }
+                }                
+                // Check for custom char delimiter //{delimiter}\n{numbers}.
                 if (input.ElementAt(0) == '/' && input.ElementAt(1) == '/' && input.ElementAt(3) == '\n')
                 {
-                    customDelimiter = input.ElementAt(2).ToString();
+                    customDelimiterList.Add(input.ElementAt(2).ToString());
                 }
             }
 
             // Split string by all delimiter types.
-            if (customDelimiter != "")
+            foreach (var delimiter in customDelimiterList)
             {
-                input = input.Replace(customDelimiter, ",");
+                input = input.Replace(delimiter, ",");
             }
             input = input.Replace('\n', ',');           
             return input.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();

@@ -80,5 +80,13 @@ namespace CalculatorTest
             Assert.AreEqual("66", result);
         }
 
+        [TestMethod]
+        public void Add_InputsWithMultipleCustomBracketedDelimiter_ReturnsEqual()
+        {
+            string input = "//[*][!!][r9r]\n11r9r22*hh*33!!44";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("110", result);
+        }
+
     }
 }
