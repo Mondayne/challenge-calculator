@@ -17,10 +17,6 @@ namespace ChallengeCalculator
             {
                 return "0";
             }
-            else if (splitInput.Length > 2)
-            {
-                throw new FormatException("Cannot have more than 2 numbers.");
-            }
             else
             {
                 foreach (var item in splitInput)

@@ -16,11 +16,11 @@ namespace CalculatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException), "Cannot have more than 2 numbers.")]
         public void Add_MoreThanTwoNumberInput_ReturnsFormatException()
         {
-            string input = "1,2,3";
-            Calculator.Add(input);
+            string input = "1,2,3,4,5,6,7,8,9,10,11,12";
+            var result = Calculator.Add(input);
+            Assert.AreEqual("78", result);
         }
 
         [TestMethod]

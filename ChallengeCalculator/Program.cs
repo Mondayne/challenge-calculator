@@ -11,6 +11,7 @@ namespace ChallengeCalculator
             Console.WriteLine(Calculator.Add("4,-3"));
             Console.WriteLine(Calculator.Add("2,"));
             Console.WriteLine(Calculator.Add("1, l;ijk"));
+            Console.WriteLine(Calculator.Add("1,2,3,4,5,6,7,8,9,10,11,12"));
             Console.ReadKey();
         }
     }
